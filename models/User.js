@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema(
     commentIds: [{ type: ObjectId, ref: "Comment" }],
     followingIds: [{ type: ObjectId, ref: "User" }],
     followerIds: [{ type: ObjectId, ref: "User" }],
+    confirmed: Boolean,
   },
   { timestamps: true }
 );

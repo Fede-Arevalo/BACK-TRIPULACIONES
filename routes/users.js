@@ -6,11 +6,10 @@ const upload = require("../middlewares/upload");
 
 router.post("/register", upload.single("imageUser"), UserController.register);
 router.post("/login", UserController.login);
-
 router.get("/getUserById/:_id", UserController.getUserById);
 router.get("/getUserByName/:name", UserController.getUserByName);
 router.get("/getAllUsers", UserController.getAllUsers);
-
+router.get('/confirm/:emailToken',UserController.confirm)
 router.put(
   "/updateUserById/:_id",
   authentication,
