@@ -13,11 +13,8 @@ dbConnection();
 
 app.use("/users", require("./routes/users"));
 app.use("/posts", require("./routes/posts"));
-app.use("/comments", require("./routes/comments"));
 app.use("/events", require("./routes/events"));
 app.use("/incidents", require("./routes/incidents"));
-
-
 
 app.use(express.static("./uploads"));
 app.use(typeError);

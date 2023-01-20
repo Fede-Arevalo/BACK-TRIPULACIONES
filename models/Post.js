@@ -17,8 +17,7 @@ const PostSchema = new mongoose.Schema(
     body: {
       type: String,
       required: [true, "Por favor rellena el cuerpo del post"],
-    },
-    commentIds: [{ type: ObjectId, ref: "Comment" }],
+    },    
     likes_post: [{ type: ObjectId, ref: "User" }],
   },
   { timestamps: true }
