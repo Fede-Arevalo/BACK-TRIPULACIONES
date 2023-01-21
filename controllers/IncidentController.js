@@ -26,7 +26,7 @@ const IncidentController = {
       console.error(error);
       res
         .status(500)
-        .send({ msg: "Ha habido un problema al eliminar el evento" });
+        .send({ msg: "Ha habido un problema al eliminar la incidencia" });
     }
   },
   async getAllIncidents(req, res) {
@@ -37,7 +37,23 @@ const IncidentController = {
       console.error(error);
       res
         .status(500)
-        .send({ msg: "Ha habido un problema al traer los eventos", error });
+        .send({ msg: "Ha habido un problema al traer las incidencias", error });
+    }
+  },
+  async getIncidentById(req, res) {
+    try {
+      const incident = await Incident.findById(req.params._id).populate(
+        "userId"
+      );
+      res.send(incident);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({
+          msg: "Ha habido un problema al traernos la incidencia",
+          error,
+        });
     }
   },
   async getIncidentsXCategory(req, res) {
@@ -68,7 +84,7 @@ const IncidentController = {
           new: true,
         }
       ).populate("userId");
-      res.send({ message: "Evento actualizado con exito", incident });
+      res.send({ message: "Incidencia actualizada con exito", incident });
     } catch (error) {
       console.error(error);
     }
