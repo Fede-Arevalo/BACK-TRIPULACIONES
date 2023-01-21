@@ -18,8 +18,6 @@ router.put(
 );
 
 router.delete("/deleteUserById/:_id", authentication, UserController.deleteUserById);
-
 router.delete("/logout", authentication, UserController.logout);
-router.get("/loggedIn", authentication, UserController.loggedIn);
 
 module.exports = router;

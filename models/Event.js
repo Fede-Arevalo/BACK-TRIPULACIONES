@@ -30,10 +30,7 @@ const EventSchema = new mongoose.Schema(
       type: String,
       required: [true, "Por favor ingrese la ubicación del evento"],
     },
-
-    // commentIds: [{ type: ObjectId, ref: "Comment" }],
-    // likes_event: [{ type: ObjectId, ref: "User" }],
-  },
+ },
   { timestamps: true }
 );
 

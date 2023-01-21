@@ -24,10 +24,7 @@ const UserSchema = new mongoose.Schema(
     role: String,
     tokens: [],
     eventIds: [{ type: ObjectId, ref: "Event" }],
-    postIds: [{ type: ObjectId, ref: "Post" }],
-    commentIds: [{ type: ObjectId, ref: "Comment" }],
-    followingIds: [{ type: ObjectId, ref: "User" }],
-    followerIds: [{ type: ObjectId, ref: "User" }],
+    incidentesIds: [{ type: ObjectId, ref: "Event" }],
     confirmed: Boolean,
   },
   { timestamps: true }
