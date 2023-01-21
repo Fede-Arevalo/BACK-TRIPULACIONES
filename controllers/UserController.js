@@ -173,24 +173,6 @@ const UserController = {
         .send({ msg: "Hubo un problema al intentar desconectar el usuario" });
     }
   },
-
-  async loggedIn(req, res) {
-    try {
-      const user = await User.findById(req.user._id).populate({
-        path: "postIds",
-        path: "commentIds",
-        path: "followingIds",
-        path: "followerIds",
-      });
-      res.send(user);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({
-        msg: "Ha habido un problema al consultar el usuario logeado",
-        error,
-      });
-    }
-  },
 };
 
 module.exports = UserController;

@@ -9,53 +9,49 @@ const IncidentSchema = new mongoose.Schema(
     },
     incidentDate: {
       type: Date,
-      required: [true, "Por favor ingrese la fecha del evento"],
+      required: [true, "Por favor ingrese la fecha del incident"],
     },
     timeIncident: {
       type: String,
-      required: [true, "Por favor ingrese la hora del evento"],
+      required: [true, "Por favor ingrese la hora del incident"],
     },
     category: {
       type: String,
-      required: [true, "Por favor danos detalles del evento"],
+      required: [true, "Por favor danos detalles del incident"],
     },
     title: {
       type: String,
-      required: [true, "Por favor rellena el título del post"],
+      required: [true, "Por favor rellena el título del incident"],
     },
     description: {
       type: String,
-      required: [true, "Por favor danos detalles del evento"],
+      required: [true, "Por favor danos detalles del incident"],
     },
     imageIncident: {
       type: String,
     },
     locationIncident: {
       type: String,
-      required: [true, "Por favor ingrese la ubicación del evento"],
+      required: [true, "Por favor ingrese la ubicación del incident"],
     },
-    state: {
-      type: Boolean,
-      required: [true, "Por favor ingrese la ubicación del evento"],
-    },
-    // commentIds: [{ type: ObjectId, ref: "Comment" }],
-    // likes_incident: [{ type: ObjectId, ref: "User" }],
+    send_incident: [{ type: ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );
 
 IncidentSchema.index({
   title: "text",
+  category: "text"
 });
 
 IncidentSchema.methods.toJSON = function () {
-  const post = this._doc;
-  delete post.createdAt;
-  delete post.updatedAt;
-  delete post.__v;
-  return post;
+  const incident = this._doc;
+  delete incident.createdAt;
+  delete incident.updatedAt;
+  delete incident.__v;
+  return incident;
 };
 
-const Incident = mongoose.model("Incident", IncidentSchema);
+const incident = mongoose.model("Incident", IncidentSchema);
 
-module.exports = Incident;
+module.exports = incident;
