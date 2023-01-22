@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
     role: String,
     tokens: [],
     eventIds: [{ type: ObjectId, ref: "Event" }],
-    incidentesIds: [{ type: ObjectId, ref: "Event" }],
+    incidentsIds: [{ type: ObjectId, ref: "Event" }],
     confirmed: Boolean,
   },
   { timestamps: true }
