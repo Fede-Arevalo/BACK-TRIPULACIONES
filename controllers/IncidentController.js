@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const Incident = require("../models/Incident.js");
+const Category = require("../models/Category");
+
 
 const IncidentController = {
   async createIncident(req, res, next) {
@@ -8,6 +10,10 @@ const IncidentController = {
         ...req.body,
         userId: req.user._id,
         imageIncident: req.file?.filename,
+        categoryId: req.body.categoryId,
+      });
+      await Category.findByIdAndUpdate(req.body.categoryId, {
+        $push: { incidentIds: incident._id },
       });
       await User.findByIdAndUpdate(req.user._id, {
         $push: { incidentIds: incident._id },

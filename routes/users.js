@@ -19,5 +19,8 @@ router.put(
 
 router.delete("/deleteUserById/:_id", authentication, UserController.deleteUserById);
 router.delete("/logout", authentication, UserController.logout);
+router.get('/recoverPassowrd',UserController.recoverPassword)
+router.put('/resetPassword/:recoverToken',UserController.resetPassword)
+
 
 module.exports = router;

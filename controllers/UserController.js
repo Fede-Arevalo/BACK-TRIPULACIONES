@@ -173,6 +173,43 @@ const UserController = {
         .send({ msg: "Hubo un problema al intentar desconectar el usuario" });
     }
   },
+  async recoverPassword(req, res) {
+    try {
+      const recoverToken = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET, {
+        expiresIn: "24h",
+      });
+      const url = "http://localhost:8080/users/resetPassword/" + recoverToken;
+      await transporter.sendMail({
+        to: req.body.email,
+        subject: "Recuperar contraseña",
+        html: `<h3> Recuperar contraseña </h3>
+  <a href="${url}">Recuperar contraseña</a>
+  El enlace expirará en 24 horas
+  `,
+      });
+      res.send({
+        message: "Un correo de recuperación se envio a tu dirección de correo",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async resetPassword(req, res) {
+    try {
+      const recoverToken = req.params.recoverToken;
+      const payload = jwt.verify(recoverToken, process.env.JWT_SECRET);
+      await User.findOneAndUpdate(
+        { email: payload.email },
+        { password: req.body.password }
+      );
+      res.send({ message: "contraseña cambiada con éxito" });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+
+  
 };
 
 module.exports = UserController;
