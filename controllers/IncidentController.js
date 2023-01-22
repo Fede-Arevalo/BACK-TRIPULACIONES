@@ -37,7 +37,7 @@ const IncidentController = {
   },
   async getAllIncidents(req, res) {
     try {
-      const incidents = await Incident.find();
+      const incidents = await Incident.find().populate("userId");
       res.send(incidents);
     } catch (error) {
       console.error(error);
