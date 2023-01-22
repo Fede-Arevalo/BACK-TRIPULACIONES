@@ -7,7 +7,7 @@ const EventSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User",
     },
-    image: {
+    imageEvent: {
       type: String,
     },
     title: {
@@ -23,14 +23,14 @@ const EventSchema = new mongoose.Schema(
       required: [true, "Por favor ingrese la fecha del evento"],
     },
     timeEvent: {
-      type:Date,
+      type: String,
       required: [true, "Por favor ingrese la hora del evento"],
     },
     location: {
       type: String,
       required: [true, "Por favor ingrese la ubicación del evento"],
     },
- },
+  },
   { timestamps: true }
 );
 
