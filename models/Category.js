@@ -4,7 +4,7 @@ const CategorySchema = new mongoose.Schema(
   {
     name: {
         type: String,
-        required: [true, "Por favor rellena tu nombre"],
+        required: [true, "Por favor la categoría"],
       },
   },
   { timestamps: true }

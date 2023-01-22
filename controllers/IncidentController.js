@@ -16,7 +16,7 @@ const IncidentController = {
         $push: { incidentIds: incident._id },
       });
       await User.findByIdAndUpdate(req.user._id, {
-        $push: { incidentIds: incident._id },
+        $push: { incidentsIds: incident._id },
       });
       res.status(201).send(incident);
     } catch (error) {

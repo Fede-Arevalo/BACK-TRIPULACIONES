@@ -9,11 +9,11 @@ const IncidentSchema = new mongoose.Schema(
     },
     incidentDate: {
       type: Date,
-      required: [true, "Por favor ingrese la fecha del incident"],
+      // required: [true, "Por favor ingrese la fecha del incident"],
     },
     timeIncident: {
       type: String,
-      required: [true, "Por favor ingrese la hora del incident"],
+      // required: [true, "Por favor ingrese la hora del incident"],
     },
     category: {
       type: String,
@@ -21,7 +21,7 @@ const IncidentSchema = new mongoose.Schema(
     },
     title: {
       type: String,
-      required: [true, "Por favor rellena el título del incident"],
+      // required: [true, "Por favor rellena el título del incident"],
     },
     description: {
       type: String,
