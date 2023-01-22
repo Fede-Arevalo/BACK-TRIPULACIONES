@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Event = require("../models/Event.js");
 
 const EventController = {
+
   async createEvent(req, res, next) {
     try {
       const event = await Event.create({
@@ -40,6 +41,23 @@ const EventController = {
         .send({ msg: "Ha habido un problema al traer los eventos", error });
     }
   },
+  async getEventById(req, res) {
+    try {
+      const event = await Event.findById(req.params._id).populate(
+        "userId"
+      );
+      res.send(event);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({
+          msg: "Ha habido un problema al traernos el Evento",
+          error,
+        });
+    }
+  },
+
   async updateEventById(req, res) {
     try {
       const event = await Event.findByIdAndUpdate(

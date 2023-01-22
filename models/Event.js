@@ -23,7 +23,7 @@ const EventSchema = new mongoose.Schema(
       required: [true, "Por favor ingrese la fecha del evento"],
     },
     timeEvent: {
-      type: String,
+      type:Date,
       required: [true, "Por favor ingrese la hora del evento"],
     },
     location: {
