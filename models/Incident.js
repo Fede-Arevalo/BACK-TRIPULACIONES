@@ -46,7 +46,6 @@ IncidentSchema.index({
 
 IncidentSchema.methods.toJSON = function () {
   const incident = this._doc;
-  delete incident.createdAt;
   delete incident.updatedAt;
   delete incident.__v;
   return incident;
