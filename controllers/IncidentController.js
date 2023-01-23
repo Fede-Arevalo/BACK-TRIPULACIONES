@@ -2,7 +2,6 @@ const User = require("../models/User");
 const Incident = require("../models/Incident.js");
 const Category = require("../models/Category");
 
-
 const IncidentController = {
   async createIncident(req, res, next) {
     try {
@@ -54,26 +53,26 @@ const IncidentController = {
       res.send(incident);
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .send({
-          msg: "Ha habido un problema al traernos la incidencia",
-          error,
-        });
+      res.status(500).send({
+        msg: "Ha habido un problema al traernos la incidencia",
+        error,
+      });
     }
   },
   async getIncidentsXCategory(req, res) {
     try {
-        if(!req.body.category) {
-            return res.status(400).send({ msg: "La categoría es requerida" });
-        }
-        const incidents = await Incident.find({
-            category: req.body.category
-        });
-        if(!incidents) {
-            return res.status(404).send({ msg: "No se encontraron incidentes con esa categoría" });
-        }
-        res.send({ msg: "Incidentes por categoría", incidents });
+      if (!req.body.category) {
+        return res.status(400).send({ msg: "La categoría es requerida" });
+      }
+      const incidents = await Incident.find({
+        category: req.body.category,
+      });
+      if (!incidents) {
+        return res
+          .status(404)
+          .send({ msg: "No se encontraron incidentes con esa categoría" });
+      }
+      res.send({ msg: "Incidentes por categoría", incidents });
     } catch (error) {
       console.error(error);
       res
@@ -96,35 +95,32 @@ const IncidentController = {
     }
   },
   async sendIncidents(req, res) {
-        try {
-          const incident = await Incident.findByIdAndUpdate(
-            req.params._id,
-            { $push: { send_incident: req.user._id } },
-            { new: true }
-          ).populate("userId");
-          res.send(incident);
-        } catch (error) {
-          console.error(error);
-          res
-            .status(500)
-            .send({ msg: "Ha habido un problema al enviar el incidente" });
-        }
-      },
-    
-      async pendingIncidents(req, res) {
-        try {
-          const incident = await Incident.findByIdAndUpdate(
-            req.params._id,
-            { $pull: { send_incident: req.user._id } },
-            { new: true }
-          ).populate("userId");
-          res.send(incident);
-        } catch (error) {
-          console.error(error);
-          res
-            .status(500)
-            .send({ msg: "Ha habido un problema" });
-        }
-      },
+    try {
+      const incident = await Incident.findByIdAndUpdate(
+        req.params._id,
+        { $push: { send_incident: req.user._id } },
+        { new: true }
+      ).populate("userId");
+      res.send(incident);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ msg: "Ha habido un problema al enviar el incidente" });
+    }
+  },
+  async pendingIncidents(req, res) {
+    try {
+      const incident = await Incident.findByIdAndUpdate(
+        req.params._id,
+        { $pull: { send_incident: req.user._id } },
+        { new: true }
+      ).populate("userId");
+      res.send(incident);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ msg: "Ha habido un problema" });
+    }
+  },
 };
 module.exports = IncidentController;

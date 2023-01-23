@@ -32,7 +32,7 @@ const EventController = {
   },
   async getAllEvents(req, res) {
     try {
-      const events = await Event.find();
+      const events = await Event.find().populate("userId");
       res.send(events);
     } catch (error) {
       console.error(error);
@@ -57,7 +57,6 @@ const EventController = {
         });
     }
   },
-
   async updateEventById(req, res) {
     try {
       const event = await Event.findByIdAndUpdate(
