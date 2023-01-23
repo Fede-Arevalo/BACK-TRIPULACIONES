@@ -4,5 +4,6 @@ const CategoryIncidentController = require("../controllers/CategoryIncidentContr
 const { authentication } = require("../middlewares/authentication");
 
 router.post("/createCategory",authentication, CategoryIncidentController.createCategory);
+router.get("/getAllCategory", CategoryIncidentController.getAllCategory);
 
 module.exports = router;

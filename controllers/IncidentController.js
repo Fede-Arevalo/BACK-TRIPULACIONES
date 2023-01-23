@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const Incident = require("../models/Incident.js");
 const Category = require("../models/Category");
+const transporter = require("../config/nodemailer");
+
 
 
 const IncidentController = {
@@ -15,8 +17,24 @@ const IncidentController = {
       await Category.findByIdAndUpdate(req.body.categoryId, {
         $push: { incidentIds: incident._id },
       });
+      
       await User.findByIdAndUpdate(req.user._id, {
         $push: { incidentsIds: incident._id },
+      });
+      const data = {...req.body};
+      await transporter.sendMail({
+        to: "thedevitesti@gmail.com",
+        subject: "incidencia cargada",
+        html: `
+        <form>
+        <h2>Titulo: ${incident.title}"</h2>
+        <h2>Descripcion: ${incident.description}"</h2>
+        <h2>Ubicacion: ${incident.locationIncident}"</h2>
+        <h2>Categoria: ${incident.category}"</h2>
+        <h2>Imagen: </h2>
+        <img src=${incident?.imageIncident} alt="" srcset="">
+    </form>
+        `,
       });
       res.status(201).send(incident);
     } catch (error) {
