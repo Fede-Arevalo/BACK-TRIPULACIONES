@@ -19,6 +19,17 @@ const CategoryIncidentController = {
         res.status(500).send({msg:"Error al crear la categoria",error})
     }
   },
-};
+  async getAllCategory(req, res) {
+    try {
+      const categories = await Category.find();
+      res.send({ msg: "Sus categorias", categories })
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ msg: "Ha habido un problema al traer las categorias", error });
+      }
+    },
+  };
 
 module.exports = CategoryIncidentController;

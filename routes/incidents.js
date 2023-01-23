@@ -12,5 +12,10 @@ router.get("/getIncidentsXCategory",authentication, IncidentController.getIncide
 router.put("/updateIncidentById/:_id",authentication, isAdmin, IncidentController.updateIncidentById);
 router.put("/sendIncidents/:_id", authentication, IncidentController.sendIncidents);
 router.put("/pendingIncidents/:_id", authentication, IncidentController.pendingIncidents);
+router.get("/getIncidentsXCategory",authentication, IncidentController.getIncidentsXCategory);
+router.get("/getAllIncidentsSent", IncidentController.getAllIncidentsSent);
+router.get("/getAllIncidentsPending", IncidentController.getAllIncidentsPending);
+
+
 
 module.exports = router;

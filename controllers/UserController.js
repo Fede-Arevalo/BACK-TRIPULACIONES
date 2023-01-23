@@ -140,14 +140,14 @@ const UserController = {
         email: req.body.email,
       });
       if (!user) {
-        return res.status(400).send({ msg: "Correo o contraseña incorrectos" });
+        return res.status(400).send({ msg: "Datos incorrectos" });
       }
       if (!user.confirmed) {
         return res.status(400).send({ message: "Debes confirmar tu correo" });
       }
       const isMatch = await bcrypt.compare(req.body.password, user.password);
       if (!isMatch) {
-        return res.status(400).send({ msg: "Correo o contraseña incorrectos" });
+        return res.status(400).send({ msg: "Datos incorrectos" });
       }
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
       if (user.tokens.length > 4) user.tokens.shift;
