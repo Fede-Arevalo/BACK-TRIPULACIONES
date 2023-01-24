@@ -78,7 +78,7 @@ const IncidentController = {
   },
   async getAllIncidentsPending(req, res) {
     try {
-      const incidents = await Incident.find({ "send_incident": [] });
+      const incidents = await Incident.find({ send_incident: [] });
       res.send({ msg: "sus Incidencias pendientes son:", incidents });
     } catch (error) {
       console.error(error);
@@ -101,6 +101,78 @@ const IncidentController = {
       });
     }
   },
+
+  async getIncidents7Days(req, res) {
+    try {
+      const today = new Date();
+      const sevenDaysAgo = new Date(today - 7 * 24 * 60 * 60 * 1000).toISOString();;
+      const incidents = await Incident.find({
+        createdAt: {
+          $lt: sevenDaysAgo
+      }
+      })
+      res.send({msg: "sus incidencias con 7 dias de antiguedad" , incidents});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({
+        msg: "Ha habido un problema al traernos las incidencias",
+        error,
+      });
+    }
+  },
+  async getIncidents14Days(req, res) {
+    try {
+      const today = new Date();
+      const fourteenDaysAgo = new Date(today - 14 * 24 * 60 * 60 * 1000).toISOString();;
+      const incidents = await Incident.find({
+        createdAt: {
+          $lt: fourteenDaysAgo
+      }
+      });
+      res.send({msg: "sus incidencias con 14 dias de antiguedad" , incidents});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({
+        msg: "Ha habido un problema al traernos las incidencias",
+        error,
+      });
+    }
+  },
+  async getIncidents24Days(req, res) {
+    try {
+      const today = new Date();
+      const twentyFourDaysAgo = new Date(today - 24 * 24 * 60 * 60 * 1000).toISOString();;
+      const incidents = await Incident.find({
+        createdAt: {
+          $lt: twentyFourDaysAgo
+      }
+      });
+      res.send({msg: "sus incidencias con 24 dias de antiguedad" , incidents});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({
+        msg: "Ha habido un problema al traernos las incidencias",
+        error,
+      });
+    }
+  },
+  async getIncidents60Days(req, res) {
+    try {
+        const sixtyDaysAgo = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString();
+        const incidents = await Incident.find({
+          createdAt: {
+            $lt: sixtyDaysAgo
+        }
+        });
+        res.send({msg: "sus incidencias con 60 dias de antiguedad" , incidents});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({
+            msg: "Ha habido un problema al traernos las incidencias",
+            error,
+        });
+    }
+},
   async getIncidentsXCategory(req, res) {
     try {
       if (!req.params.category) {

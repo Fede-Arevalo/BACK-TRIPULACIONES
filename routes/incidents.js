@@ -15,6 +15,10 @@ router.put("/pendingIncidents/:_id", authentication, IncidentController.pendingI
 router.get("/getIncidentsXCategory/:category", IncidentController.getIncidentsXCategory);
 router.get("/getAllIncidentsSent", IncidentController.getAllIncidentsSent);
 router.get("/getAllIncidentsPending", IncidentController.getAllIncidentsPending);
+router.get("/getIncidents7Days", IncidentController.getIncidents7Days);
+router.get("/getIncidents14Days", IncidentController.getIncidents14Days);
+router.get("/getIncidents24Days", IncidentController.getIncidents24Days);
+router.get("/getIncidents60Days", IncidentController.getIncidents60Days);
 
 
 
