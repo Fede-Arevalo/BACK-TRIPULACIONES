@@ -198,9 +198,10 @@ const UserController = {
     try {
       const recoverToken = req.params.recoverToken;
       const payload = jwt.verify(recoverToken, process.env.JWT_SECRET);
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
       await User.findOneAndUpdate(
         { email: payload.email },
-        { password: req.body.password }
+        { password: hashedPassword }
       );
       res.send({ message: "contraseña cambiada con éxito" });
     } catch (error) {

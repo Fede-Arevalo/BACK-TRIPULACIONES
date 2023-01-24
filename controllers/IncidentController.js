@@ -103,11 +103,11 @@ const IncidentController = {
   },
   async getIncidentsXCategory(req, res) {
     try {
-      if (!req.body.category) {
+      if (!req.params.category) {
         return res.status(400).send({ msg: "La categoría es requerida" });
       }
       const incidents = await Incident.find({
-        category: req.body.category,
+        category: req.params.category,
       });
       if (!incidents) {
         return res
