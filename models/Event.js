@@ -13,11 +13,7 @@ const EventSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Por favor rellena el título del evento"],
-    },
-    content: {
-      type: String,
-      required: [true, "Por favor danos detalles del evento"],
-    },
+    },    
     eventDate: {
       type: Date,
       required: [true, "Por favor ingrese la fecha del evento"],
