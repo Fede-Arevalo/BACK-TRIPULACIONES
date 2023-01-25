@@ -27,20 +27,4 @@ const isAdmin = async (req, res, next) => {
   next();
 };
 
-// const isPostAuthor = async (req, res, next) => {
-//   try {
-//     const post = await Post.findById(req.params._id);
-//     if (post.userId.toString() !== req.user._id.toString()) {
-//       return res.status(403).send({ msg: "Este post no es de tu propiedad" });
-//     }
-//     next();
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).send({
-//       msg: "Ha habido un problema al comprobar la autoría del post",
-//       error,
-//     });
-//   }
-// };
-
 module.exports = { authentication, isAdmin };

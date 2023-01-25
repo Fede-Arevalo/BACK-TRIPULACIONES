@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const transporter = require("../config/nodemailer");
 
-
 const UserController = {
   async register(req, res, next) {
     try {
@@ -16,8 +15,12 @@ const UserController = {
         confirmed: false,
         role: "user",
       });
-      const emailToken = jwt.sign({ email: req.body.email },process.env.JWT_SECRET,{ expiresIn: "48h" });
-      const url = 'http://localhost:8080/users/confirm/'+ emailToken
+      const emailToken = jwt.sign(
+        { email: req.body.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "48h" }
+      );
+      const url = "http://localhost:8080/users/confirm/" + emailToken;
       await transporter.sendMail({
         to: req.body.email,
         subject: "Confirme su registro",
@@ -113,12 +116,10 @@ const UserController = {
       res.status(201).send({ msg: "Usuario actualizado con éxito!", user });
     } catch (error) {
       console.error(error);
-      res
-        .status(400)
-        .send({
-          msg: "Hubo un problema al intentar actualizar el usuario",
-          error,
-        });
+      res.status(400).send({
+        msg: "Hubo un problema al intentar actualizar el usuario",
+        error,
+      });
     }
   },
 
@@ -150,7 +151,10 @@ const UserController = {
         return res.status(400).send({ msg: "Datos incorrectos" });
       }
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-      if (user.tokens.length > 4) user.tokens.shift;
+      const tokenShift = () => {
+        user.tokens.shift;
+      };
+      if (user.tokens.length > 4) tokenShift();
       user.tokens.push(token);
       await user.save();
       res.send({ msg: "Bienvenid@ " + user.name, token, user });
@@ -175,9 +179,13 @@ const UserController = {
   },
   async recoverPassword(req, res) {
     try {
-      const recoverToken = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET, {
-        expiresIn: "24h",
-      });
+      const recoverToken = jwt.sign(
+        { email: req.body.email },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "24h",
+        }
+      );
       const url = "http://localhost:8080/users/resetPassword/" + recoverToken;
       await transporter.sendMail({
         to: req.body.email,
@@ -208,9 +216,6 @@ const UserController = {
       console.error(error);
     }
   },
-
-
-  
 };
 
 module.exports = UserController;
