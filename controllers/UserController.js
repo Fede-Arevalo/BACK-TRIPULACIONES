@@ -20,7 +20,7 @@ const UserController = {
         process.env.JWT_SECRET,
         { expiresIn: "48h" }
       );
-      const url = "http://localhost:8080/users/confirm/" + emailToken;
+      const url = "https://back-tripulaciones-production-e793.up.railway.app/users/confirm/" + emailToken;
       await transporter.sendMail({
         to: req.body.email,
         subject: "Confirme su registro",
@@ -186,7 +186,7 @@ const UserController = {
           expiresIn: "24h",
         }
       );
-      const url = "http://localhost:8080/users/resetPassword/" + recoverToken;
+      const url = "https://back-tripulaciones-production-e793.up.railway.app/users/resetPassword/" + recoverToken;
       await transporter.sendMail({
         to: req.body.email,
         subject: "Recuperar contraseña",
