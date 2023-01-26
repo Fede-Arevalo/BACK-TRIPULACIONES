@@ -30,7 +30,7 @@ const UserController = {
         <h2><a href="${url}">👉 ​​Click aqui para confirmar tu registro 👈</a></h2>
         `,
       });
-      res.status(201).send({ msg: "Usuario registrado con éxito", user });
+      res.status(201).send({ msg: "Usuario registrado con éxito. Para confirmar revisa tu gmail en el apartado <Spam>", user });
     } catch (error) {
       console.error(error);
       next(error);
